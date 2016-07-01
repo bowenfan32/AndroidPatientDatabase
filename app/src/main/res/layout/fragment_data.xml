@@ -8,86 +8,109 @@
 
     android:weightSum="1">
 
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/layout_bg"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:layout_marginTop="30dp"
         android:layout_marginBottom="30dp"
         android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp">
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/layout_bg"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            >
+            android:orientation="vertical">
 
-            <TextView android:id="@+id/title"
+            <TextView
+                android:id="@+id/title"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:textColor="#000000"
+                android:gravity="center_vertical|center_horizontal"
                 android:text="Patient Biodata"
-                android:textSize="20dp"
-                android:gravity="center_vertical|center_horizontal" />
+                android:textColor="#000000"
+                android:textSize="20dp" />
 
             <Space
                 android:layout_width="1dp"
-                android:layout_height="30dp"/>
+                android:layout_height="30dp" />
 
-            <TextView android:id="@+id/patient_name"
+            <TextView
+                android:id="@+id/patient_name"
                 android:layout_width="match_parent"
                 android:layout_height="27dp"
                 android:textColor="#000000"
                 android:textSize="20dp" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:id="@+id/patient_age"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:textColor="#000000" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:id="@+id/patient_gender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:textColor="#000000" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:id="@+id/patient_score_left"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:textColor="#000000" />
 
             <TextView
+                android:id="@+id/patient_score_right"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/patient_score_right"
+                android:textColor="#000000" />
+
+            <TextView
+                android:id="@+id/patient_testtime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:textColor="#000000" />
 
             <Space
                 android:layout_width="1dp"
-                android:layout_height="40dp"/>
+                android:layout_height="10dp" />
 
             <TextView
+                android:id="@+id/left_rom"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Left Hand ROM"
-                android:id="@+id/left_rom" />
+                android:textAppearance="?android:attr/textAppearanceLarge" />
 
-            <include layout="@layout/include_table"/>
+            <include layout="@layout/include_table" />
 
             <TextView
+                android:id="@+id/right_rom"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Right Hand ROM"
-                android:id="@+id/right_rom" />
+                android:textAppearance="?android:attr/textAppearanceLarge" />
 
-            <include layout="@layout/include_table_right"/>
+            <include layout="@layout/include_table_right" />
+
+            <TextView
+                android:id="@+id/comment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Comments:"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <EditText
+                android:id="@+id/commenBody"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:editable="false"
+                android:focusable="false"
+                android:singleLine="true" />
 
         </LinearLayout>
 

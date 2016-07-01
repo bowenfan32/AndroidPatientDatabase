@@ -26,14 +26,12 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 
-
 public class DataListFragment extends ListFragment {
 
     private static final String TAG = "ASDF";
 
     private ArrayList<PatientData> mPatients;
     private String loginName;
-
 
     public static DataListFragment newInstance(String loginName) {
         // obtain the username variable from previous activity
@@ -43,7 +41,6 @@ public class DataListFragment extends ListFragment {
         fragment.setArguments(args);
         return fragment;
     }
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -61,28 +58,21 @@ public class DataListFragment extends ListFragment {
         setListAdapter(adapter);
     }
 
-
     private class FetchItemsTask extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... arg0) {
 
             try {
-                Log.d(TAG, "connect1");
-//                String link = "http://14.201.9.164:8080/AndroidGetList.php";
-//                String link = "http://10.130.42.83:8080/AndroidGetList.php";
-                String link ="http://" + FileReader.readFromFile() + "/AndroidGetList.php";
+                String link ="http://" + FileReader.readFromFile() + "/LeapMotion/AndroidGetList.php";
                 URL url = new URL(link);
                 String urlParams = "loginName=" +  URLEncoder.encode(loginName);
 
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                Log.d(TAG, "connect");
                 conn.setRequestMethod("POST");
-
                 conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
                 conn.setRequestProperty("Content-Length", "" + Integer.toString(urlParams.getBytes().length));
                 conn.setDoInput(true);
                 conn.setDoOutput(true);
-
 
                 OutputStream os = conn.getOutputStream();
                 BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
@@ -95,7 +85,6 @@ public class DataListFragment extends ListFragment {
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(in));
                 String next;
                 while ((next = bufferedReader.readLine()) != null) {
-                    Log.d(TAG, next);
                     JSONArray ja = new JSONArray(next);
                     // write data to the ArrayList
                     for (int i = 0; i < ja.length(); i++) {
@@ -106,6 +95,8 @@ public class DataListFragment extends ListFragment {
                         data.setGender(jo.getString("gender"));
                         data.setScoreLeft(jo.getString("score1"));
                         data.setScoreRight(jo.getString("score2"));
+                        data.setComment(jo.getString("comments"));
+                        data.setTime(jo.get("testtime"));
 
                         data.setRawData(jo.getString("rawdata"));
                         data.setRawData2(jo.getString("rawdata2"));
@@ -113,7 +104,7 @@ public class DataListFragment extends ListFragment {
                         data.setRawData4(jo.getString("rawdata4"));
 
                         mPatients.add(data);
-                        Log.d(TAG, data.toString());
+                        Log.d(TAG, next);
                     }
                 }
             } catch (MalformedURLException e) {
@@ -135,11 +126,10 @@ public class DataListFragment extends ListFragment {
         i.putExtra(DataFragment.EXTRA_PATIENT_ID, c.getId());
         startActivity(i);
     }
+
     @Override
     public void onDestroy() {
         super.onDestroy();
         mPatients.clear(); // clears ArrayList upon exit
     }
-
-
 }

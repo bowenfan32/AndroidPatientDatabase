@@ -9,11 +9,9 @@ public class DataActivity extends SingleFragmentActivity {
 
     @Override
     protected Fragment createFragment() {
-
         UUID pId = (UUID)getIntent()
                 .getSerializableExtra(DataFragment.EXTRA_PATIENT_ID);
         return DataFragment.newInstance(pId);
     }
-
 
 }

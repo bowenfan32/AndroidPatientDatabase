@@ -27,26 +27,20 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 
-/**
- * Created by bowen on 11/09/2015.
- */
+
 public class LoginActivity extends AppCompatActivity implements OnClickListener {
     private static final String TAG = "ASDF";
 
+    public static final String EXTRA_LOGIN = "";
     private EditText userName, userPwd;
     private ImageView buttonPwd; // to switch password visibility
     private boolean isPwdShow = false; // default as non-visible
-
-    public static final String EXTRA_LOGIN =
-            "";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         init();
-
     }
 
     public void init() {
@@ -56,7 +50,6 @@ public class LoginActivity extends AppCompatActivity implements OnClickListener 
         buttonPwd.setOnClickListener(this);
         findViewById(R.id.button_ok_user).setOnClickListener(this);
     }
-
 
     @Override
     public void onClick(View v) {
@@ -72,14 +65,12 @@ public class LoginActivity extends AppCompatActivity implements OnClickListener 
                 }
                 isPwdShow = !isPwdShow;
                 break;
-
             case R.id.button_ok_user: // user login
                 new LoginTask().execute();
                 break;
             default:
                 break;
         }
-
     }
 
     private class LoginTask extends AsyncTask<String, Void, String> {
@@ -92,19 +83,15 @@ public class LoginActivity extends AppCompatActivity implements OnClickListener 
 
             try {
                 // connect to php script in the server
-//                String link = "http://14.201.9.164:8080/AndroidGetPassword.php";
-//                String link = "http://10.130.42.83:8080/AndroidGetPassword.php";
-                String link ="http://" + FileReader.readFromFile() + "/AndroidGetPassword.php";
+                String link ="http://" + FileReader.readFromFile() + "/LeapMotion/AndroidGetPassword.php";
                 URL url = new URL(link);
                 String urlParams = "loginName=" +  URLEncoder.encode(userLoginName);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("POST");
-
                 conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
                 conn.setRequestProperty("Content-Length", "" + Integer.toString(urlParams.getBytes().length));
                 conn.setDoInput(true);
                 conn.setDoOutput(true);
-
 
                 // post data to php script
                 OutputStream os = conn.getOutputStream();
@@ -150,9 +137,4 @@ public class LoginActivity extends AppCompatActivity implements OnClickListener 
             }
         }
     }
-
-
-
-
-
 }

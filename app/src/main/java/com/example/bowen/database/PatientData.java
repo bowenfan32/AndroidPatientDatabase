@@ -8,19 +8,17 @@ import java.util.UUID;
 
 public class PatientData {
 
-
     private UUID mId;
     private String mName;
     private String mAge;
     private String mGender;
     private String mScoreLeft;
     private String mScoreRight;
+    private Object mTime;
+    private String comments;
 
-    private String mData;
-    private String mData2;
-    private String mData3;
-    private String mData4;
 
+    private String mData, mData2, mData3, mData4;
 
     public PatientData() {
         mId = UUID.randomUUID();
@@ -103,6 +101,24 @@ public class PatientData {
         return mData4;
     }
 
+    public void setTime(Object time) {
+        mTime = time;
+    }
+
+    public Object getTime() {
+        return mTime;
+    }
+
+
+    public void setComment(String data) {
+        comments = data;
+    }
+
+    public String getComments() {
+        return comments;
+    }
+
+
     @Override
     public String toString() {
         return mName;
@@ -115,7 +131,6 @@ public class PatientData {
 class DataContext {
 
     private ArrayList<PatientData> mPatients;
-
     private static DataContext sDataContext;
     private Context mAppContext;
 
@@ -142,6 +157,4 @@ class DataContext {
         }
         return null;
     }
-
-
 }
